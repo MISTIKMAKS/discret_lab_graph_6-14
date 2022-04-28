@@ -13,6 +13,7 @@ namespace Lab_6
         {
             FileViewer file = new FileViewer();
             int[,] result = file.ReadFile();
+            int[,] result_weighted = file.ReadFileWeighted();
 
             /*for (int i = 1; i < 21; i++)
             {
@@ -27,6 +28,7 @@ namespace Lab_6
 
             IncidentMatrix incMatrix = new IncidentMatrix();
             AdjacencyMatrix adjMatrix = new AdjacencyMatrix();
+            WeightedMatrix weightMatrix = new WeightedMatrix();
 
             do
             {
@@ -37,6 +39,8 @@ namespace Lab_6
                 Console.WriteLine("2 - Lab_7");
                 Console.WriteLine("3 - Lab_8");
                 Console.WriteLine("4 - Lab_9");
+                Console.WriteLine("5 - Lab_10");
+                Console.WriteLine("6 - Lab_11");
                 Console.WriteLine("0 - Quit");
                 Console.WriteLine("--------------------------");
                 Console.Write("Selection: ");
@@ -80,7 +84,7 @@ namespace Lab_6
                         Console.WriteLine();
 
                         DFS dfs = new DFS();
-                        dfs.Search(adjMatrix, adjMatrix.CreateMatrix(file, result), 4);
+                        dfs.Search(adjMatrix, adjMatrix.CreateMatrix(file, result), 3);
                         dfs.PrintResult();
                         break;
                     case 4:
@@ -89,8 +93,19 @@ namespace Lab_6
                         Console.WriteLine();
 
                         BFS bfs = new BFS();
-                        bfs.Search(adjMatrix, adjMatrix.CreateMatrix(file, result), 4);
+                        bfs.Search(adjMatrix, adjMatrix.CreateMatrix(file, result), 3);
                         bfs.PrintResult();
+                        break;
+                    case 5:
+                        Console.WriteLine("You Chosen Lab_10:");
+                        //Lab_10
+                        int[,] myGraph = weightMatrix.CreateMatrix(file, result_weighted);
+                        weightMatrix.printMatrix(myGraph, file);
+                        break;
+                    case 6:
+                        Console.WriteLine("You Chosen Lab_11:");
+                        //Lab_11
+                        FloydUorshellMatrix floydUorshellMatrix = new FloydUorshellMatrix(weightMatrix);
                         break;
                     case 0:
                         Console.WriteLine("Goodbye! See Ya Later, Aligator!!!");
@@ -103,6 +118,8 @@ namespace Lab_6
                         Console.WriteLine("2 - Lab_7");
                         Console.WriteLine("3 - Lab_8");
                         Console.WriteLine("4 - Lab_9");
+                        Console.WriteLine("5 - Lab_10");
+                        Console.WriteLine("6 - Lab_11");
                         Console.WriteLine("0 - Quit");
                         Console.WriteLine("--------------------------");
                         Console.Write("Selection: ");

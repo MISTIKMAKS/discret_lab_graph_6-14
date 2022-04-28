@@ -23,9 +23,9 @@ namespace Lab_6
                 for (int j = 1; j < file.GetM() + 1; j++)
                 {
                     int v = matrix[j, 0];
-                    int u = matrix[j, 1];
+                    int e = matrix[j, 1];
 
-                    if (order[i] == v && v == u)
+                    if (order[i] == v && v == e)
                     {
                         result[i, j] = 2;
                     }
@@ -33,7 +33,7 @@ namespace Lab_6
                     {
                         result[i, j] = 1;
                     }
-                    else if (order[i] == u)
+                    else if (order[i] == e)
                     {
                         result[i, j] = -1;
                     }

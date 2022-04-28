@@ -115,5 +115,37 @@ namespace Lab_6
                 Console.WriteLine("Exception: " + e.Message);
             }
         }
+        //Lab_10
+        public int[,] ReadFileWeighted()
+        {
+            string line;
+            string[] substr;
+            int[,] fileInfo = null;
+            try
+            {
+                StreamReader streamReader = new StreamReader("C:\\Users\\User\\Desktop\\Програмування Дискретних Структур\\Лаб_6\\Graphs\\graph_my.txt");
+                line = streamReader.ReadLine();
+                substr = line.Split();
+                this.n = Convert.ToInt32(substr[0]);
+                this.m = Convert.ToInt32(substr[1]);
+
+                fileInfo = new int[m + 1, 3];
+                line = streamReader.ReadLine();
+                for (int i = 1; line != null; i++)
+                {
+                    substr = line.Split();
+                    fileInfo[i, 0] = Convert.ToInt32(substr[0]);
+                    fileInfo[i, 1] = Convert.ToInt32(substr[1]);
+                    fileInfo[i, 2] = Convert.ToInt32(substr[2]);
+                    line = streamReader.ReadLine();
+                }
+                streamReader.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.Message);
+            }
+            return fileInfo;
+        }
     }
 }
