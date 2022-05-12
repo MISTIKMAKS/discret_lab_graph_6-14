@@ -8,85 +8,117 @@ namespace Lab_6
 {
     internal class FloydUorshellMatrix
     {
-        private int[,,] minPathMatrix;
-        private int[,] pathMatrix;
-        private int infinity = int.MaxValue;
-
-        public FloydUorshellMatrix(WeightedMatrix weightedMatrix)
+        public FloydUorshellMatrix(WeightedMatrix weight, int[,] weightedMatrix)
         {
-            int n = weightedMatrix.GetN();
-            int[,,] matrix = new int[n + 1, n + 1, n + 1];
-            int[,] weightMatrix = weightedMatrix.GetMatrix();
+            int n = weight.GetN();
+            int[,,] Matrix = new int[n + 1, n + 1, n + 1];
+            int[,] Path = createPathMatrix(n);
 
-            for (int c = 1; c < n + 1; c++)
+            for (int i = 1; i <= n; i++)
             {
-                for (int r = 1; r < n + 1; r++)
+                for (int j = 1; j <= n; j++)
                 {
-                    for (int x = 1; x < n + 1; x++)
-                    {
-                        matrix[c, r, x] = weightMatrix[r, x];
-                    }
+                    Matrix[0, i, j] = weightedMatrix[i, j];
                 }
             }
 
-            int[,] P = new int[n + 1, n + 1];
-            for (int i = 1; i < n + 1; i++)
+            for (int k = 1; k <= n; k++)
             {
-                for (int j = 1; j < n + 1; j++)
+                for (int i = 1; i <= n; i++)
                 {
-                    if (i == j)
+                    for (int j = 1; j <= n; j++)
                     {
-                        P[i, j] = 0;
-                    }
-                    else
-                    {
-                        P[i, j] = 1;
-                    }
-                }
-            }
-
-            for (int k = 1; k < n + 1; k++)
-            {
-                for (int i = 1; i < n + 1; i++)
-                {
-                    for (int j = 1; j < n + 1; j++)
-                    {
-                        if (matrix[k - 1, i, k] != infinity && matrix[k - 1, k, j] != infinity)
+                        if (Matrix[k -1,  i, k] != int.MaxValue && Matrix[k - 1, k, j] != int.MaxValue)
                         {
-                            if ((matrix[k - 1, i, k] + matrix[k - 1, k, j] < matrix[k - 1, i, j]))
+                            if (Matrix[k -1, i, k] + Matrix[k - 1, k, j] < Matrix[k - 1, i, j])
                             {
-                                matrix[k, i, j] = (matrix[k - 1, i, k] + matrix[k - 1, k, j]);
-                                P[i, j] = k;
+                                Matrix[k, i, j] = Matrix[k - 1, i, k] + Matrix[k - 1, k, j];
+                                Path[i, j] = k;
                             }
+                            else
+                            {
+                                Matrix[k, i, j] = Matrix[k - 1, i, j];
+                            }
+                        }
+                        else
+                        {
+                            Matrix[k, i, j] = Matrix[k - 1, i, j];
                         }
                     }
                 }
-                Console.WriteLine("k: " + k);
-                printMatrix(matrix, weightedMatrix, k);
+                Console.WriteLine("");
+                printMatrix(Matrix, n, k);
             }
+            Console.WriteLine("");
+            Console.WriteLine("Path matrix:");
+            printPathMatrix(Path, n);
         }
-        public static void printMatrix(int[,,] matrix, WeightedMatrix weightedMatrix, int k)
+
+        private int[,] createPathMatrix(int n)
+        {
+            int[,] T = new int[n + 1, n + 1];
+            for (int i = 1; i <= n; i++)
+            {
+                for (int j = 1; j <= n; j++)
+                {
+                    if (i == j)
+                    {
+                        T[i, j] = 0;
+                    }
+                    else
+                    {
+                        T[i, j] = i;
+                    }
+                }
+            }
+            return T;
+        }
+
+        public static void printPathMatrix(int[,] matrix, int n)
         {
             Console.Write("   |");
-            for (int j = 1; j < weightedMatrix.GetN() + 1; j++)
+            for (int j = 1; j < n + 1; j++)
             {
                 Console.Write($"{j,2} |");
             }
             Console.WriteLine();
 
-            for (int i = 1; i < weightedMatrix.GetN() + 1; i++)
+            for (int i = 1; i < n + 1; i++)
             {
                 Console.Write($"{i,2} |");
-                for (int j = 1; j < weightedMatrix.GetN() + 1; j++)
+                for (int j = 1; j < n + 1; j++)
+                {
+                    if (matrix[i, j] == int.MaxValue)
+                    {
+                        Console.Write(" - |");
+                    }
+                    else
+                        Console.Write($"{matrix[i, j],2} |");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public static void printMatrix(int[,,] matrix, int n, int k)
+        {
+            Console.Write("   |");
+            for (int j = 1; j < n + 1; j++)
+            {
+                Console.Write($"{j,2} |");
+            }
+            Console.WriteLine();
+
+            for (int i = 1; i < n + 1; i++)
+            {
+                Console.Write($"{i,2} |");
+                for (int j = 1; j < n + 1; j++)
                 {
                     if (matrix[k, i, j] == int.MaxValue)
                     {
-                        Console.Write(" * |");
+                        Console.Write(" - |");
                     }
                     else
-                    {
                         Console.Write($"{matrix[k, i, j],2} |");
-                    }
                 }
                 Console.WriteLine();
             }

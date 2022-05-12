@@ -31,13 +31,13 @@ namespace Lab_6
                 for (int j = 1; j < n + 1; j++)
                 {
                     isEqual = false;
-                    iterator = 1;
                     int[] grid = { order[i], order[j] };
                     for (int k = 1; k < m + 1; k++)
                     {
                         if ((grid[0] == result[k, 0]) && (grid[1] == result[k, 1]))
                         {
                             isEqual = true;
+                            iterator = k;
                             break;
                         }
                     }

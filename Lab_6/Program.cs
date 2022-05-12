@@ -41,6 +41,7 @@ namespace Lab_6
                 Console.WriteLine("4 - Lab_9");
                 Console.WriteLine("5 - Lab_10");
                 Console.WriteLine("6 - Lab_11");
+                Console.WriteLine("7 - Lab_12");
                 Console.WriteLine("0 - Quit");
                 Console.WriteLine("--------------------------");
                 Console.Write("Selection: ");
@@ -105,7 +106,14 @@ namespace Lab_6
                     case 6:
                         Console.WriteLine("You Chosen Lab_11:");
                         //Lab_11
-                        FloydUorshellMatrix floydUorshellMatrix = new FloydUorshellMatrix(weightMatrix);
+                        int[,] myGraphFloydUorshel = weightMatrix.CreateMatrix(file, result_weighted);
+                        FloydUorshellMatrix floydUorshellMatrix = new FloydUorshellMatrix(weightMatrix, myGraphFloydUorshel);
+                        break;
+                    case 7:
+                        Console.WriteLine("You Chosen Lab_12:");
+                        //Lab_12
+                        int[,] myGraphDeykstra = weightMatrix.CreateMatrix(file, result_weighted);
+                        DeykstraMatrix lab = new DeykstraMatrix(weightMatrix, myGraphDeykstra);
                         break;
                     case 0:
                         Console.WriteLine("Goodbye! See Ya Later, Aligator!!!");
@@ -120,6 +128,7 @@ namespace Lab_6
                         Console.WriteLine("4 - Lab_9");
                         Console.WriteLine("5 - Lab_10");
                         Console.WriteLine("6 - Lab_11");
+                        Console.WriteLine("7 - Lab_12");
                         Console.WriteLine("0 - Quit");
                         Console.WriteLine("--------------------------");
                         Console.Write("Selection: ");
