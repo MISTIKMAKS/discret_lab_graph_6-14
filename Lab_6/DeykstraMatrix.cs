@@ -20,17 +20,18 @@ namespace Lab_6
                     if (weightMatrix[i, j] < 0)
                     {
                         //throw new Exception("Element must be > 0");
+                        Console.WriteLine("Element must be > 0");
                         break;
                     }
                 }
             }
-            findPoints(w, weightMatrix, 3);
-            Console.WriteLine("Weight: ");
+            findPoints(w, weightMatrix, 1);
+            Console.WriteLine("Path Weight: ");
             printVector(minWeight);
 
             Console.WriteLine("");
 
-            Console.WriteLine("Path: ");
+            Console.WriteLine("Path Point: ");
             printVector(minPath);
 
             /*
@@ -48,18 +49,18 @@ namespace Lab_6
         private void findPoints(WeightedMatrix weight, int[,] weightMatrix, int a)
         {
             HashSet<int> M = new HashSet<int>();
-            int[] T = new int[weight.GetN() + 1];
+            int[] Point = new int[weight.GetN() + 1];
             int[] Path = new int[weight.GetN() + 1];
 
             M.Add(a);
-            T[a] = 0;
+            Point[a] = 0;
 
             for (int i = 1; i < weight.GetN() + 1; i++)
             {
                 Path[i] = 0;
                 if (i != a)
                 {
-                    T[i] = int.MaxValue;
+                    Point[i] = int.MaxValue;
                 }
             }
 
@@ -72,9 +73,9 @@ namespace Lab_6
                     {
                         if (!M.Contains(v))
                         {
-                            if (T[v] > (T[x] + weightMatrix[x, v]))
+                            if (Point[v] > (Point[x] + weightMatrix[x, v]))
                             {
-                                T[v] = (T[x] + weightMatrix[x, v]);
+                                Point[v] = (Point[x] + weightMatrix[x, v]);
                                 Path[v] = x;
                             }
                         }
@@ -87,47 +88,47 @@ namespace Lab_6
                 {
                     if (!M.Contains(v))
                     {
-                        if (T[v] < minWeight)
+                        if (Point[v] < minWeight)
                         {
-                            minWeight = T[v];
+                            minWeight = Point[v];
                             minPoint = v;
                         }
                     }
                 }
                 M.Add(minPoint);
-                this.minWeight = T;
+                this.minWeight = Point;
                 this.minPath = Path;
                 x = minPoint;
             }
         }
-        public void printVector(int[] V)
+        public void printVector(int[] Vector)
         {
-            for (int i = 1; i < V.Length; i++)
+            for (int i = 1; i < Vector.Length; i++)
             {
-                if (V[i] == int.MaxValue)
+                if (Vector[i] == int.MaxValue)
                 {
-                    Console.Write("{V" + i + ": " + "-" + "} ");
+                    Console.Write("[Vector" + i + ": " + "-" + "] ");
                 }
                 else
                 {
-                    Console.Write("{V" + i + ": " + V[i] + "} ");
+                    Console.Write("[Vector" + i + ": " + Vector[i] + "] ");
                 }
                 Console.WriteLine();
             }
         }
 
-        public void printVector(int[] V, int last)
+        public void printVector(int[] Vector, int last)
         {
-            for (int i = 1; i < V.Length; i++)
+            for (int i = 1; i < Vector.Length; i++)
             {
                 if (i == last)
-                    if (V[i] == int.MaxValue)
+                    if (Vector[i] == int.MaxValue)
                     {
-                        Console.Write("{V" + i + ": " + "-" + "} ");
+                        Console.Write("[Vector" + i + ": " + "-" + "] ");
                     }
                     else
                     {
-                        Console.Write("{V" + i + ": " + V[i] + "} ");
+                        Console.Write("[Vector" + i + ": " + Vector[i] + "] ");
                     }
             }
             Console.WriteLine();

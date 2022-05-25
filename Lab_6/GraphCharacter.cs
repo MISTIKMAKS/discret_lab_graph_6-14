@@ -9,11 +9,12 @@ namespace Lab_6
     internal class GraphCharacter
     {
         //AdjacencyMatrix Lab_7
-        public static int[,] FindInnerAndOuter(AdjacencyMatrix adjacencyMatrix, int[,] matrix)
+        public static int[,] FindInnerAndOuter(AdjacencyMatrix adjacencyMatrix, int[,] result_adj, FileViewer file_adj)
         {
             int n = adjacencyMatrix.GetN();
+            AdjacencyMatrix matrix_adj = new AdjacencyMatrix();
+            int[,] matrix = matrix_adj.CreateMatrix(file_adj, result_adj);
             int m = adjacencyMatrix.GetM();
-            //int[,] matrix = adjacencyMatrix.GetMatrix();
 
             int tmp_inner;
             int tmp_outer;

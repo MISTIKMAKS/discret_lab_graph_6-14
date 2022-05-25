@@ -34,7 +34,8 @@ namespace Lab_6
             int[,] fileInfo = null;
             try
             {
-                StreamReader streamReader = new StreamReader("C:\\Users\\User\\Desktop\\Програмування Дискретних Структур\\Лаб_6\\Graphs\\graph_01_1.txt");
+                StreamReader streamReader = new StreamReader("C:\\Users\\User\\Desktop\\Програмування Дискретних Структур\\Лаб_6\\Graphs\\graph_my.txt");
+                //StreamReader streamReader = new StreamReader("C:\\Users\\User\\Desktop\\Програмування Дискретних Структур\\Лаб_6\\Graphs\\graph_01_1.txt");
                 line = streamReader.ReadLine();
                 substr = line.Split();
                 this.n = Convert.ToInt32(substr[0]);
@@ -124,6 +125,7 @@ namespace Lab_6
             try
             {
                 StreamReader streamReader = new StreamReader("C:\\Users\\User\\Desktop\\Програмування Дискретних Структур\\Лаб_6\\Graphs\\graph_my.txt");
+                //StreamReader streamReader = new StreamReader("C:\\Users\\User\\Desktop\\Програмування Дискретних Структур\\Лаб_6\\Graphs\\graph_01_1.txt");
                 line = streamReader.ReadLine();
                 substr = line.Split();
                 this.n = Convert.ToInt32(substr[0]);

@@ -42,6 +42,8 @@ namespace Lab_6
                 Console.WriteLine("5 - Lab_10");
                 Console.WriteLine("6 - Lab_11");
                 Console.WriteLine("7 - Lab_12");
+                Console.WriteLine("8 - Lab_13");
+                Console.WriteLine("9 - Lab_14");
                 Console.WriteLine("0 - Quit");
                 Console.WriteLine("--------------------------");
                 Console.Write("Selection: ");
@@ -59,14 +61,14 @@ namespace Lab_6
 
                         int[,] adjacencyMatrix = adjMatrix.CreateMatrix(file, result);
                         adjMatrix.printMatrix(adjacencyMatrix, file);
-                        file.WriteAdjacencyFile(incidentMatrix);
+                        file.WriteAdjacencyFile(adjacencyMatrix);
                         break;
                     case 2:
                         Console.WriteLine("You Chosen Lab_7:");
                         //Lab_7
                         Console.WriteLine();
 
-                        int[,] inner_outer = GraphCharacter.FindInnerAndOuter(adjMatrix, adjMatrix.CreateMatrix(file, result));
+                        int[,] inner_outer = GraphCharacter.FindInnerAndOuter(adjMatrix, result, file);
 
                         for (int i = 1; i < file.GetN() + 1; i++)
                         {
@@ -115,6 +117,20 @@ namespace Lab_6
                         int[,] myGraphDeykstra = weightMatrix.CreateMatrix(file, result_weighted);
                         DeykstraMatrix lab = new DeykstraMatrix(weightMatrix, myGraphDeykstra);
                         break;
+                    case 8:
+                        Console.WriteLine("You Chosen Lab_13:");
+                        int[,] result_lab13 = file.ReadFile();
+                        adjacencyMatrix = adjMatrix.CreateMatrix(file, result_lab13);
+                        adjMatrix.printMatrix(adjacencyMatrix, file);
+                        Console.WriteLine();
+                        ColoredMatrix graphColor = new ColoredMatrix(adjacencyMatrix, adjMatrix, result_lab13, file);
+                        break;
+                    case 9:
+                        Console.WriteLine("You Chosen Lab_14:");
+                        int[,] result_lab14 = file.ReadFile();
+                        adjacencyMatrix = adjMatrix.CreateMatrix(file, result_lab14);
+                        Relations relations = new Relations(adjacencyMatrix, adjMatrix);
+                        break;
                     case 0:
                         Console.WriteLine("Goodbye! See Ya Later, Aligator!!!");
                         break;
@@ -129,6 +145,8 @@ namespace Lab_6
                         Console.WriteLine("5 - Lab_10");
                         Console.WriteLine("6 - Lab_11");
                         Console.WriteLine("7 - Lab_12");
+                        Console.WriteLine("8 - Lab_13");
+                        Console.WriteLine("9 - Lab_14");
                         Console.WriteLine("0 - Quit");
                         Console.WriteLine("--------------------------");
                         Console.Write("Selection: ");
